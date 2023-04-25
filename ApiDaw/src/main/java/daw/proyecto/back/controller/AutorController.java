@@ -4,8 +4,11 @@
  */
 package daw.proyecto.back.controller;
 
-import daw.proyecto.back.model.Autor;
+import daw.proyecto.back.model.authentication.AuthenticationRequest;
 import daw.proyecto.back.service.AutorService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,13 +17,22 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author Izan Lorenzo
  */
-@RestController
+@RestController("/api/autor")
+@RequiredArgsConstructor
 public class AutorController {
     
-    AutorService autorService;
+    private final AutorService autorService;
     
-    @PostMapping(value="/api/autor")
+    @PostMapping("/login")
+    public ResponseEntity login(@RequestBody AuthenticationRequest credenciales) {
+       
+        return new ResponseEntity<>(autorService.authenticate(credenciales), HttpStatus.OK);
+    }
+    
+    /*
+    @PostMapping()
     public Autor crearAutor(@RequestBody Autor autor) {
         return autorService.crearAutor(autor);
     }
+    */
 }

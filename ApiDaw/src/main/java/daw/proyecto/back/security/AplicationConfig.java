@@ -6,6 +6,7 @@ package daw.proyecto.back.security;
 
 import daw.proyecto.back.repository.AutorRepository;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -56,4 +57,8 @@ public class AplicationConfig {
         return config.getAuthenticationManager();
     }
     
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
 }
