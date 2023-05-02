@@ -4,11 +4,20 @@
  */
 package daw.proyecto.back.service;
 
+import daw.proyecto.back.repository.NoticiaRepository;
+
 /**
  *
- * @author Lila
+ * @author Izan Lorenzo
  */
 public class NoticiaService {
+    
+    private final NoticiaRepository noticiaRepository;
+
+    public NoticiaService(NoticiaRepository noticiaRepository) {
+        this.noticiaRepository = noticiaRepository;
+    }
+    
     
     
 }

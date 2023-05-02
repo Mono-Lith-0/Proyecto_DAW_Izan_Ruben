@@ -4,12 +4,12 @@
  */
 package daw.proyecto.back.repository;
 
-import daw.proyecto.back.entidad.Noticia;
+import daw.proyecto.back.model.Noticia;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
- * @author Lila
+ * @author Izan Lorenzo
  */
 public interface NoticiaRepository extends JpaRepository<Noticia, Long> {
     

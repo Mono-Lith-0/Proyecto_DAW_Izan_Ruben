@@ -4,33 +4,47 @@
  */
 package daw.proyecto.back.service;
 
-import daw.proyecto.back.entidad.Autor;
+import daw.proyecto.back.model.Autor;
+import daw.proyecto.back.model.inputDto.AuthRequest;
+import daw.proyecto.back.model.outputDto.AuthResponse;
 import daw.proyecto.back.repository.AutorRepository;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
+import daw.proyecto.back.security.JwtService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  *
- * @author Lila
+ * @author p-ilorenzo
  */
-@Service("AutorService")
+@RequiredArgsConstructor
 public class AutorService {
     
     private final AutorRepository autorRepository;
-    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-
-    public AutorService(AutorRepository autorRepository) {
-        this.autorRepository = autorRepository;
+    private final JwtService jwtService;
+    private final PasswordEncoder encoder;
+    private final AuthenticationManager authenticationManager;
+    
+    public AuthResponse authenticate(AuthRequest request) {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        request.getUsername(),
+                        request.getPassword()
+                )
+        );
+        var user = autorRepository.findByUsername(request.getUsername()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        var jwt = jwtService.generateToken(user);
+        
+        return  new AuthResponse(jwt);
+        
     }
     
-    // POST
     public Autor crearAutor(Autor autor) {
         
-        autor.setPasswd(encoder.encode(autor.getPasswd()));
+        autor.setPassword(encoder.encode(autor.getPassword()));
         
-        Autor saved = autorRepository.save(autor);
-        
-        return saved;
+        return autorRepository.save(autor);
     }
 }
- 

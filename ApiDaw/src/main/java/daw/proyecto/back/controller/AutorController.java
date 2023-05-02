@@ -4,24 +4,23 @@
  */
 package daw.proyecto.back.controller;
 
-import daw.proyecto.back.entidad.Autor;
+import daw.proyecto.back.model.Autor;
 import daw.proyecto.back.service.AutorService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
- * @author Lila
+ * @author Izan Lorenzo
  */
 @RestController
 public class AutorController {
     
-    @Autowired
     AutorService autorService;
     
+    @PostMapping(value="/api/autor")
     public Autor crearAutor(@RequestBody Autor autor) {
-        
         return autorService.crearAutor(autor);
     }
 }
