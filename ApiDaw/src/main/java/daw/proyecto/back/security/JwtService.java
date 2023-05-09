@@ -6,6 +6,7 @@ package daw.proyecto.back.security;
 
 import daw.proyecto.back.model.Autor;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -42,10 +43,10 @@ public class JwtService {
         return claimsResolver.apply(claims);
     }
     
-    public String generateToken(Autor user) {
+    public String generateToken(Autor autor) {
         Map<String, Object> claim = new HashMap<>();
-        claim.put("userId", user.getId());
-        return generateToken(claim, user);
+        claim.put("userId", autor.getId());
+        return generateToken(claim, autor);
     }
     
     public String generateToken(Map<String, Object> claims, UserDetails userDetails) {
@@ -64,7 +65,7 @@ public class JwtService {
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
     
-    public Claims getAllClaims(String token) {
+    public Claims getAllClaims(String token) throws ExpiredJwtException {
         return Jwts.parserBuilder()
                 .setSigningKey(getSignInKey())
                 .build()
@@ -92,3 +93,4 @@ public class JwtService {
         return Date.from(lct.atZone(ZoneId.systemDefault()).toInstant());
     }
 }
+
