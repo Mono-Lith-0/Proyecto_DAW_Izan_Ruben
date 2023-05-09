@@ -44,7 +44,7 @@ public class Autor implements UserDetails{
     @Column(name="usuario", length=20, nullable=false, unique=true)
     private String username;
     
-    @Column(name="passwd", length=20, nullable=false)
+    @Column(name="passwd", length=64, nullable=false)
     private String password;
     
     private final String authority = "AUTOR";
