@@ -26,7 +26,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
     @Configuration
     @EnableWebSecurity
     @RequiredArgsConstructor
-public class AplicationConfig {
+public class AppConfig {
         
     private final AutorRepository autorRepository;
         

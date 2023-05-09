@@ -7,9 +7,12 @@ package daw.proyecto.back.service;
 import daw.proyecto.back.model.Autor;
 import daw.proyecto.back.model.authentication.AuthenticationRequest;
 import daw.proyecto.back.model.authentication.AuthenticationResponse;
+import daw.proyecto.back.model.inputDto.AutorInputDto;
+import daw.proyecto.back.model.outputDto.AutorOutputDto;
 import daw.proyecto.back.repository.AutorRepository;
 import daw.proyecto.back.security.JwtService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -28,6 +31,7 @@ public class AutorService {
     private final PasswordEncoder encoder;
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
+    private final ModelMapper modelMapper;
     
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
@@ -44,10 +48,16 @@ public class AutorService {
     }
     
     // POST
-    public Autor crearAutor(Autor autor) {
+    public AutorOutputDto crearAutor(AutorInputDto data) {
+        
+        Autor autor = modelMapper.map(data, Autor.class);
+        
+        System.out.println(autor.toString());
         
         autor.setPassword(encoder.encode(autor.getPassword()));
         
-        return autorRepository.save(autor);
+        Autor created = autorRepository.save(autor);
+        
+        return modelMapper.map(created, AutorOutputDto.class);
     }
 }
