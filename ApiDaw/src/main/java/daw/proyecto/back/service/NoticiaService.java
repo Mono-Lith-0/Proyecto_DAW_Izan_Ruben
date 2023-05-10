@@ -4,6 +4,9 @@
  */
 package daw.proyecto.back.service;
 
+import daw.proyecto.back.model.Autor;
+import daw.proyecto.back.model.Noticia;
+import daw.proyecto.back.model.inputDto.NoticiaInputDto;
 import daw.proyecto.back.repository.NoticiaRepository;
 
 /**
@@ -16,6 +19,10 @@ public class NoticiaService {
 
     public NoticiaService(NoticiaRepository noticiaRepository) {
         this.noticiaRepository = noticiaRepository;
+    }
+
+    public Noticia addNoticia(NoticiaInputDto inputNoticia, Autor autor) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     

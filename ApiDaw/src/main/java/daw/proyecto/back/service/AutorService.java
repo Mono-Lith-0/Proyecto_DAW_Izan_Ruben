@@ -4,6 +4,7 @@
  */
 package daw.proyecto.back.service;
 
+import daw.proyecto.back.exception.AutorNotFoundException;
 import daw.proyecto.back.model.Autor;
 import daw.proyecto.back.model.authentication.AuthenticationRequest;
 import daw.proyecto.back.model.authentication.AuthenticationResponse;
@@ -11,6 +12,7 @@ import daw.proyecto.back.model.inputDto.AutorInputDto;
 import daw.proyecto.back.model.outputDto.AutorOutputDto;
 import daw.proyecto.back.repository.AutorRepository;
 import daw.proyecto.back.security.JwtService;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -59,5 +61,17 @@ public class AutorService {
         Autor created = autorRepository.save(autor);
         
         return modelMapper.map(created, AutorOutputDto.class);
+    }
+
+    public Autor getAutorFromToken(String jwt) throws AutorNotFoundException {
+
+        long id = jwtService.getUserId(jwt);
+        Optional<Autor> autor = autorRepository.findById(id);
+        
+        if (autor.isPresent()) {
+            return autor.get();
+        } else {
+            throw new AutorNotFoundException(id);
+        }
     }
 }
