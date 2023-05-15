@@ -6,12 +6,17 @@ package daw.proyecto.back.controller;
 
 import daw.proyecto.back.exception.AutorNotFoundException;
 import daw.proyecto.back.exception.BadNoticiaException;
+import daw.proyecto.back.exception.ListNoticiaException;
 import daw.proyecto.back.model.Autor;
 import daw.proyecto.back.model.Noticia;
 import daw.proyecto.back.model.inputDto.NoticiaInputDto;
+import daw.proyecto.back.model.outputDto.ListNoticia;
 import daw.proyecto.back.service.AutorService;
 import daw.proyecto.back.service.NoticiaService;
 import jakarta.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -56,6 +61,14 @@ public class NoticiaController {
     @GetMapping
     public ResponseEntity getListNoticia() {
         
-        List<ListNoticia> rawNoticias = noticiaService.getNoticias();
+        List<ListNoticia> rawNoticias;
+        List<ListNoticia> 
+        Map<Year, Map<Month, List<ListNoticia>>
+        
+        try {
+            rawNoticias = noticiaService.getNoticias();
+        } catch (ListNoticiaException ex) {
+            Logger.getLogger(NoticiaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

@@ -82,6 +82,8 @@ public class NoticiaService {
                 list.add(noticia);
             }
         }
+        
+        return list;
     }
 
 
