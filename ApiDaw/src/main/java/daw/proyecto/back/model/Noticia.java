@@ -12,7 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import java.util.Date;
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -36,11 +36,11 @@ public class Noticia {
     @Column(length=50, nullable=false)
     private String titulo;
     
-    @Column(length=20, nullable=true)
-    private String ruta;
+    @Column(nullable=true)
+    private String cuerpo;
     
-    @Column(nullable=false)
-    private Date fecha;
+    @Column(length=2048, nullable=false)
+    private LocalDate fecha;
     
     @ManyToOne
     @JoinColumn(name="autor")

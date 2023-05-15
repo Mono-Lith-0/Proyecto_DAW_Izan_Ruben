@@ -8,8 +8,8 @@ package daw.proyecto.back.exception;
  *
  * @author Izan Lorenzo
  */
-public class AutorNotFoundException extends Exception {
-    public AutorNotFoundException(long id) {
-        super("No se encontró un autor con el id \"" + id + "\"");
+public class BadNoticiaException extends Exception{
+    public BadNoticiaException() {
+        super("Faltan datos para crear la noticia");
     }
 }

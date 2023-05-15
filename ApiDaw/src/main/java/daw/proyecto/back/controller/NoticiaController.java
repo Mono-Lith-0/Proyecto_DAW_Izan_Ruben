@@ -5,14 +5,13 @@
 package daw.proyecto.back.controller;
 
 import daw.proyecto.back.exception.AutorNotFoundException;
+import daw.proyecto.back.exception.BadNoticiaException;
 import daw.proyecto.back.model.Autor;
 import daw.proyecto.back.model.Noticia;
 import daw.proyecto.back.model.inputDto.NoticiaInputDto;
 import daw.proyecto.back.service.AutorService;
 import daw.proyecto.back.service.NoticiaService;
 import jakarta.servlet.http.HttpServletRequest;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,6 +44,11 @@ public class NoticiaController {
             return new ResponseEntity<>("Autor from bearer token was not a registered Autor", HttpStatus.FORBIDDEN);
         }
         
-        Noticia noticia = noticiaService.addNoticia(inputNoticia, autor);
+        try {
+            Noticia noticia = noticiaService.addNoticia(inputNoticia, autor);
+            return new ResponseEntity<>(noticia, HttpStatus.OK);
+        } catch (BadNoticiaException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     } 
 }
