@@ -9,12 +9,10 @@ import daw.proyecto.back.exception.ListNoticiaException;
 import daw.proyecto.back.model.Autor;
 import daw.proyecto.back.model.Noticia;
 import daw.proyecto.back.model.inputDto.NoticiaInputDto;
-import daw.proyecto.back.model.outputDto.ListNoticia;
+import daw.proyecto.back.model.outputDto.DatosNoticia;
 import daw.proyecto.back.repository.NoticiaRepository;
 import io.micrometer.common.util.StringUtils;
 import java.time.LocalDate;
-import java.time.Month;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -48,9 +46,9 @@ public class NoticiaService {
         return noticiaRepository.save(noticia);
     }
     
-    public List<ListNoticia> getNoticias() throws ListNoticiaException {
+    public List<DatosNoticia> getNoticias() throws ListNoticiaException {
         
-        List<ListNoticia> list = noticiaRepository.findNoticias();
+        List<DatosNoticia> list = noticiaRepository.findNoticias();
         
         if (!list.isEmpty()) {
             return list;
@@ -58,33 +56,26 @@ public class NoticiaService {
             throw new ListNoticiaException();
         }
     }
-    
-    public List<ListNoticia> groupByYear(List<ListNoticia> noticias, Year anno) {
+
+    public Map<String, List<DatosNoticia>> groupByDate(List<DatosNoticia> noticias) {
         
-        List<ListNoticia> list = new ArrayList<>();
+        Map<String, List<DatosNoticia>> sidebar = new LinkedHashMap<>();
         
-        for (ListNoticia noticia : noticias) {
-            
-            if (anno.equals(noticia.getFecha().getYear())) {
-                list.add(noticia);
+        for (DatosNoticia noticia : noticias) {
+            if (!sidebar.containsKey(noticia.getFecha())) {
+                List<DatosNoticia> mapValue = new ArrayList<>();
+                
+                mapValue.add(noticia);
+                
+                sidebar.put(noticia.getFecha(), mapValue);
+            } else {
+                sidebar.get(noticia.getFecha()).add(noticia);
             }
         }
         
-        return list;
+        return sidebar;
     }
     
-    public List<ListNoticia> groupByMonth(List<ListNoticia> noticias, Month mes) {
-        
-        List<ListNoticia> list = new ArrayList<>();
-        
-        for (ListNoticia noticia : noticias) {
-            if (mes.equals(noticia.getFecha().getMonth())) {
-                list.add(noticia);
-            }
-        }
-        
-        return list;
-    }
 
 
 }

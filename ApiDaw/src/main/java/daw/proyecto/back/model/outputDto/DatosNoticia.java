@@ -4,7 +4,6 @@
  */
 package daw.proyecto.back.model.outputDto;
 
-import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,11 +15,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ListNoticia {
+public class DatosNoticia {
     
     private long id;
     
     private String titulo;
     
-    private LocalDate fecha;
+    private String fecha;
 }
