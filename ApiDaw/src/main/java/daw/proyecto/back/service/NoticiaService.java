@@ -12,6 +12,7 @@ import daw.proyecto.back.model.inputDto.NoticiaInputDto;
 import daw.proyecto.back.model.outputDto.DatosNoticia;
 import daw.proyecto.back.repository.NoticiaRepository;
 import io.micrometer.common.util.StringUtils;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -30,11 +32,12 @@ public class NoticiaService {
     
     private final NoticiaRepository noticiaRepository;
 
-    public Noticia addNoticia(NoticiaInputDto inputNoticia, Autor autor) throws BadNoticiaException {
+    public Noticia addNoticia(NoticiaInputDto inputNoticia, MultipartFile imagen, Autor autor) throws BadNoticiaException, IOException {
         
         Noticia noticia = new Noticia();
         
         noticia.setTitulo(inputNoticia.getTitulo());
+        noticia.setImagen(imagen.getBytes());
         noticia.setAutor(autor);
         noticia.setFecha(LocalDate.now());
         noticia.setCuerpo(inputNoticia.getCuerpo());

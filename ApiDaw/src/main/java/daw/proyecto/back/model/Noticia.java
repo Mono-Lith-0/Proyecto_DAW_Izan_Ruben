@@ -37,6 +37,9 @@ public class Noticia {
     private String titulo;
     
     @Column(nullable=true)
+    private byte[] imagen;
+    
+    @Column(nullable=true)
     private String cuerpo;
     
     @Column(length=2048, nullable=false)

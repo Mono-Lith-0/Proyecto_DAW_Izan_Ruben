@@ -54,6 +54,8 @@ public class AutorService {
         
         Autor autor = modelMapper.map(data, Autor.class);
         
+        System.out.println(data.getPassword());
+        
         autor.setPassword(encoder.encode(autor.getPassword()));
         
         Autor created = autorRepository.save(autor);

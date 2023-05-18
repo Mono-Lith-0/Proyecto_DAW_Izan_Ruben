@@ -32,10 +32,10 @@ public class AutorController {
        
         return new ResponseEntity<>(autorService.authenticate(credenciales), HttpStatus.OK);
     }
-    /*
+    
     @PostMapping()
     public AutorOutputDto crearAutor(@RequestBody AutorInputDto autor) {
         return autorService.crearAutor(autor);
     }
-*/
+
 }
