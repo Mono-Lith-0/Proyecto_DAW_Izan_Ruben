@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.33, for Win64 (x86_64)
 --
--- Host: localhost    Database: proyectodaw
+-- Host: 127.0.0.1    Database: proyectodaw
 -- ------------------------------------------------------
 -- Server version	8.0.33
 
@@ -45,6 +45,29 @@ INSERT INTO `autor` VALUES (1,'Lorenzo Martí','AUTOR','Izan','$2a$10$kYjNzXJ/xL
 UNLOCK TABLES;
 
 --
+-- Table structure for table `imagen`
+--
+
+DROP TABLE IF EXISTS `imagen`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `imagen` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `imagen`
+--
+
+LOCK TABLES `imagen` WRITE;
+/*!40000 ALTER TABLE `imagen` DISABLE KEYS */;
+INSERT INTO `imagen` VALUES (1),(2),(3),(4),(5),(6),(7),(8),(9),(10),(11),(12);
+/*!40000 ALTER TABLE `imagen` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `noticia`
 --
 
@@ -57,10 +80,13 @@ CREATE TABLE `noticia` (
   `fecha` date NOT NULL,
   `titulo` varchar(50) NOT NULL,
   `autor` bigint DEFAULT NULL,
+  `imagen_id` bigint DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKaj8oua7ocpvpv9v6lls9fq38m` (`autor`),
-  CONSTRAINT `FKaj8oua7ocpvpv9v6lls9fq38m` FOREIGN KEY (`autor`) REFERENCES `autor` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `FKq4o50dd5xw0641hmqor0roqqu` (`imagen_id`),
+  CONSTRAINT `FKaj8oua7ocpvpv9v6lls9fq38m` FOREIGN KEY (`autor`) REFERENCES `autor` (`id`),
+  CONSTRAINT `FKq4o50dd5xw0641hmqor0roqqu` FOREIGN KEY (`imagen_id`) REFERENCES `imagen` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,6 +95,7 @@ CREATE TABLE `noticia` (
 
 LOCK TABLES `noticia` WRITE;
 /*!40000 ALTER TABLE `noticia` DISABLE KEYS */;
+INSERT INTO `noticia` VALUES (1,'Este es un ejemplo de noticia, sólamente está aquí para testear que la API funciona correctamente. Por favor ignorad esta publicación.','2023-05-19','Ejemplo',1,9),(2,'Este es un ejemplo de noticia, sólamente está aquí para testear que la API funciona correctamente. Por favor ignorad esta publicación.','2023-05-19','Ejemplo',1,10),(3,'Este es un ejemplo de noticia, sólamente está aquí para testear que la API funciona correctamente. Por favor ignorad esta publicación.','2023-05-19','Ejemplo',1,12);
 /*!40000 ALTER TABLE `noticia` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -81,4 +108,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-18  9:09:19
+-- Dump completed on 2023-05-19  9:57:36
