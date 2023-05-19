@@ -12,4 +12,8 @@ public class BadNoticiaException extends Exception{
     public BadNoticiaException() {
         super("Faltan datos para crear la noticia");
     }
+    
+    public BadNoticiaException(String msg) {
+        super(msg);
+    }
 }

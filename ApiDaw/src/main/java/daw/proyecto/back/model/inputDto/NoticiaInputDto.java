@@ -7,6 +7,7 @@ package daw.proyecto.back.model.inputDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -18,5 +19,6 @@ import lombok.NoArgsConstructor;
 public class NoticiaInputDto {
     
     private String titulo;
+    private MultipartFile imagen;
     private String cuerpo;
 }

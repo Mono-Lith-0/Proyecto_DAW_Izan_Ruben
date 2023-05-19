@@ -9,17 +9,25 @@ import daw.proyecto.back.exception.BadNoticiaException;
 import daw.proyecto.back.exception.ListNoticiaException;
 import daw.proyecto.back.exception.NotImageException;
 import daw.proyecto.back.model.Autor;
+import daw.proyecto.back.model.Imagen;
 import daw.proyecto.back.model.Noticia;
 import daw.proyecto.back.model.inputDto.NoticiaInputDto;
 import daw.proyecto.back.model.outputDto.DatosNoticia;
 import daw.proyecto.back.service.AutorService;
 import daw.proyecto.back.service.NoticiaService;
+import daw.proyecto.back.service.imagenService;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,33 +39,38 @@ import org.springframework.web.multipart.MultipartFile;
  * @author Lila
  */
 @RestController
-@RequestMapping("/noticia")
+@RequestMapping("/api/noticia")
 @RequiredArgsConstructor
 public class NoticiaController {
     
     private final NoticiaService noticiaService;
+    private final imagenService imagenService;
     
     private final AutorService autorService;
     
-    @PostMapping
-    public ResponseEntity addNoticia(@RequestBody NoticiaInputDto inputNoticia, MultipartFile imagen, HttpServletRequest request) {
+    @PostMapping(consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+    public ResponseEntity addNoticia(HttpServletRequest request,  @ModelAttribute NoticiaInputDto inputNoticia) {
         
         String jwt = request.getHeader("Authorization").substring(7);
         Autor autor;
+        Imagen imagen;
+        
         try {
             autor = autorService.getAutorFromToken(jwt);
         } catch (AutorNotFoundException e) {
-            return new ResponseEntity<>("Autor from bearer token was not a registered Autor", HttpStatus.FORBIDDEN);
-        }
-        
-        if (!imagen.isEmpty()) {
-            if (imagen.getContentType().split("/")[0] != "image") {
-                return new ResponseEntity<>(new NotImageException().getMessage(), HttpStatus.BAD_REQUEST);
-            }
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.FORBIDDEN);
         }
         
         try {
-            Noticia noticia = noticiaService.addNoticia(inputNoticia, imagen, autor);
+            imagen = imagenService.saveImagen(inputNoticia.getImagen());
+        } catch (NotImageException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        } catch (IOException e) {
+            return new ResponseEntity<>(new IOException("Fallo del servidor inesperado").getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        
+        try {
+            DatosNoticia noticia = noticiaService.addNoticia(inputNoticia, imagen, autor);
             return new ResponseEntity<>(noticia, HttpStatus.OK);
         } catch (BadNoticiaException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);

@@ -7,7 +7,6 @@ package daw.proyecto.back.repository;
 import daw.proyecto.back.model.Autor;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 /**
  *

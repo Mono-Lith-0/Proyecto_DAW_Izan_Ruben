@@ -7,12 +7,12 @@ package daw.proyecto.back.service;
 import daw.proyecto.back.exception.BadNoticiaException;
 import daw.proyecto.back.exception.ListNoticiaException;
 import daw.proyecto.back.model.Autor;
+import daw.proyecto.back.model.Imagen;
 import daw.proyecto.back.model.Noticia;
 import daw.proyecto.back.model.inputDto.NoticiaInputDto;
 import daw.proyecto.back.model.outputDto.DatosNoticia;
 import daw.proyecto.back.repository.NoticiaRepository;
 import io.micrometer.common.util.StringUtils;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -32,12 +31,38 @@ public class NoticiaService {
     
     private final NoticiaRepository noticiaRepository;
 
-    public Noticia addNoticia(NoticiaInputDto inputNoticia, MultipartFile imagen, Autor autor) throws BadNoticiaException, IOException {
+    public DatosNoticia mapOutput(Noticia noticia) {
+        
+        DatosNoticia output = new DatosNoticia();
+        
+        output.setId(noticia.getId());
+        output.setTitulo(noticia.getTitulo());
+        output.setFecha(noticia.getFecha().toString());
+        
+        return output;
+    }
+    
+    public DatosNoticia mapLista(Noticia noticia) {
+        
+        DatosNoticia output = new DatosNoticia();
+        
+        output.setId(noticia.getId());
+        output.setTitulo(noticia.getTitulo());
+        output.setFecha(noticia.getFecha().getMonthValue()+ "-" + noticia.getFecha().getYear());
+        
+        return output;
+    }
+    
+    public DatosNoticia addNoticia(NoticiaInputDto inputNoticia, Imagen imagen, Autor autor) throws BadNoticiaException {
         
         Noticia noticia = new Noticia();
         
+        if (inputNoticia.getCuerpo().length() > 2048) {
+            throw new BadNoticiaException("El cuerpo de la noticia es demasiado largo");
+        }
+        
         noticia.setTitulo(inputNoticia.getTitulo());
-        noticia.setImagen(imagen.getBytes());
+        noticia.setImagen(imagen);
         noticia.setAutor(autor);
         noticia.setFecha(LocalDate.now());
         noticia.setCuerpo(inputNoticia.getCuerpo());
@@ -46,12 +71,19 @@ public class NoticiaService {
             throw new BadNoticiaException();
         }
 
-        return noticiaRepository.save(noticia);
+        Noticia saved = noticiaRepository.save(noticia);
+        
+        return mapOutput(saved);
     }
     
     public List<DatosNoticia> getNoticias() throws ListNoticiaException {
         
-        List<DatosNoticia> list = noticiaRepository.findNoticias();
+        List<Noticia> rawList = noticiaRepository.findAll();
+        List<DatosNoticia> list = new ArrayList<>();
+        
+        for (Noticia noticia : rawList) {
+            list.add(mapLista(noticia));
+        }
         
         if (!list.isEmpty()) {
             return list;

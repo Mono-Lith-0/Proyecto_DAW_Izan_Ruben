@@ -4,15 +4,13 @@
  */
 package daw.proyecto.back.repository;
 
-import daw.proyecto.back.model.Noticia;
+import daw.proyecto.back.model.Imagen;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
- * @author Izan Lorenzo
+ * @author Lila
  */
-public interface NoticiaRepository extends JpaRepository<Noticia, Long> {
-    
-    public static final String LIST_NOTICIA = "SELECT id, titulo, fecha FROM noticia";
+public interface ImagenRepository extends JpaRepository<Imagen, Long> {
     
 }
