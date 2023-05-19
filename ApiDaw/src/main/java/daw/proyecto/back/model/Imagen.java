@@ -29,4 +29,6 @@ public class Imagen {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     
+    @Column
+    private String extension; 
 }

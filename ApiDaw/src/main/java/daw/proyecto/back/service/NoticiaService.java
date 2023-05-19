@@ -13,6 +13,7 @@ import daw.proyecto.back.model.inputDto.NoticiaInputDto;
 import daw.proyecto.back.model.outputDto.DatosNoticia;
 import daw.proyecto.back.repository.NoticiaRepository;
 import io.micrometer.common.util.StringUtils;
+import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -111,6 +112,9 @@ public class NoticiaService {
         return sidebar;
     }
     
+    public byte[] getImage(Imagen imagen) {
+        File file = new File ("imagenes/" + imagen.getId() + imagen.getExtension());
+    }
 
 
 }
