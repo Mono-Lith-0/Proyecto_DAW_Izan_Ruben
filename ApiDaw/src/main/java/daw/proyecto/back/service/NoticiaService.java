@@ -121,7 +121,7 @@ public class NoticiaService {
         File file = new File ("imagenes/" + imagen.getId() + imagen.getExtension());
         
         if (!file.exists()) {
-            throw new NotImageException("No se encontró la imagen de la noticia");
+            return null;
         }
         
         FileInputStream input = new FileInputStream(file);
@@ -136,7 +136,7 @@ public class NoticiaService {
         if (noticia.isPresent()) {
             return noticia.get();
         } else {
-            throw new BadNoticiaException("No se ha encontrado ninguna noticia con el id" + id);
+            throw new BadNoticiaException("No se ha encontrado ninguna noticia con el id " + id);
         }
     }
     
@@ -156,5 +156,18 @@ public class NoticiaService {
         return output;
     }
 
-
+    public DatosNoticia borrarNoticia(long id) throws IOException, BadNoticiaException {
+       
+        Noticia noticia = getNoticiaById(id);
+        File imagen = new File ("imagenes/" + noticia.getImagen().getId() + noticia.getImagen().getExtension());
+        
+        if (imagen.exists()) {
+            imagen.delete();
+        }
+        
+        DatosNoticia borrado = mapOutput(noticia);
+        noticiaRepository.delete(noticia);
+        
+        return borrado;
+    }
 }
