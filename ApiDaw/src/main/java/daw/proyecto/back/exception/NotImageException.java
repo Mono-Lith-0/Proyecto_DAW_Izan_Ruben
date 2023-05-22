@@ -4,12 +4,18 @@
  */
 package daw.proyecto.back.exception;
 
+import java.io.IOException;
+
 /**
  *
  * @author Lila
  */
-public class NotImageException extends Exception {
+public class NotImageException extends IOException {
     public NotImageException() {
         super("El fichero enviado no es una imágen");
+    }
+    
+    public NotImageException(String msg) {
+        super(msg);
     }
 }

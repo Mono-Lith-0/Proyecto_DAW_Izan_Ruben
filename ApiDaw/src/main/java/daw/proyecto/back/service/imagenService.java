@@ -33,12 +33,16 @@ public class imagenService {
                 throw new NotImageException();
             } else {
                 Imagen imagen = new Imagen();
-                Imagen saved = imagenRepository.save(imagen);
                 
                 Pattern pattern = Pattern.compile("(\\.[^.]+)$");
                 Matcher matcher = pattern.matcher(sent.getOriginalFilename());
                 matcher.find();
-                File file = new File("imagenes/" + saved.getId() + matcher.group(1));
+                String extension = matcher.group(1);
+                imagen.setExtension(extension);
+                
+                Imagen saved = imagenRepository.save(imagen);
+                
+                File file = new File("imagenes/" + saved.getId() + extension);
                 FileOutputStream writer = new FileOutputStream(file);
                 writer.write(sent.getBytes());
                 

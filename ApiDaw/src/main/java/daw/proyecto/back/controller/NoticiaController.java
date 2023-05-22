@@ -10,29 +10,25 @@ import daw.proyecto.back.exception.ListNoticiaException;
 import daw.proyecto.back.exception.NotImageException;
 import daw.proyecto.back.model.Autor;
 import daw.proyecto.back.model.Imagen;
-import daw.proyecto.back.model.Noticia;
 import daw.proyecto.back.model.inputDto.NoticiaInputDto;
 import daw.proyecto.back.model.outputDto.DatosNoticia;
 import daw.proyecto.back.service.AutorService;
 import daw.proyecto.back.service.NoticiaService;
 import daw.proyecto.back.service.imagenService;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.websocket.server.PathParam;
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -87,6 +83,18 @@ public class NoticiaController {
             return new ResponseEntity<>(noticiaService.groupByDate(rawNoticias), HttpStatus.OK);
         } catch (ListNoticiaException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
+    @GetMapping("/{noticiaId}")
+    public ResponseEntity enviarNoticia(@PathVariable long noticiaId) {
+        
+        try {
+            return new ResponseEntity<>(noticiaService.enviarNoticia(noticiaId), HttpStatus.OK);
+        } catch (BadNoticiaException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (IOException e) {
+                        return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
