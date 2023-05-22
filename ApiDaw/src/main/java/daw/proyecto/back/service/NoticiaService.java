@@ -6,19 +6,24 @@ package daw.proyecto.back.service;
 
 import daw.proyecto.back.exception.BadNoticiaException;
 import daw.proyecto.back.exception.ListNoticiaException;
+import daw.proyecto.back.exception.NotImageException;
 import daw.proyecto.back.model.Autor;
 import daw.proyecto.back.model.Imagen;
 import daw.proyecto.back.model.Noticia;
 import daw.proyecto.back.model.inputDto.NoticiaInputDto;
 import daw.proyecto.back.model.outputDto.DatosNoticia;
+import daw.proyecto.back.model.outputDto.OutputNoticia;
 import daw.proyecto.back.repository.NoticiaRepository;
 import io.micrometer.common.util.StringUtils;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -112,8 +117,43 @@ public class NoticiaService {
         return sidebar;
     }
     
-    public byte[] getImage(Imagen imagen) {
+    public byte[] getImage(Imagen imagen) throws IOException {
         File file = new File ("imagenes/" + imagen.getId() + imagen.getExtension());
+        
+        if (!file.exists()) {
+            throw new NotImageException("No se encontró la imagen de la noticia");
+        }
+        
+        FileInputStream input = new FileInputStream(file);
+        
+        return input.readAllBytes();
+    }
+    
+    public Noticia getNoticiaById(long id) throws BadNoticiaException {
+        
+        Optional<Noticia> noticia = noticiaRepository.findById(id);
+        
+        if (noticia.isPresent()) {
+            return noticia.get();
+        } else {
+            throw new BadNoticiaException("No se ha encontrado ninguna noticia con el id" + id);
+        }
+    }
+    
+    public OutputNoticia enviarNoticia(long id) throws BadNoticiaException, IOException {
+     
+        Noticia noticia = getNoticiaById(id);
+        
+        OutputNoticia output = new OutputNoticia();
+        
+        output.setId(noticia.getId());
+        output.setTitulo(noticia.getTitulo());
+        output.setAutor(noticia.getAutor().getNombre() + " " + noticia.getAutor().getApellidos());
+        output.setFecha(noticia.getFecha());
+        output.setImagen(getImage(noticia.getImagen()));
+        output.setCuerpo(noticia.getCuerpo());
+        
+        return output;
     }
 
 

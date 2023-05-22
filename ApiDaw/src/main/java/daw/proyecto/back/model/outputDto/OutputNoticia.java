@@ -23,4 +23,5 @@ public class OutputNoticia {
     private String autor;
     private LocalDate fecha;
     private byte[] imagen;
+    private String cuerpo;
 }
