@@ -16,7 +16,6 @@ import daw.proyecto.back.service.AutorService;
 import daw.proyecto.back.service.NoticiaService;
 import daw.proyecto.back.service.imagenService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.websocket.server.PathParam;
 import java.io.IOException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

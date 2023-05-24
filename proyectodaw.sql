@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.33, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.32, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: proyectodaw
+-- Host: localhost    Database: proyectodaw
 -- ------------------------------------------------------
--- Server version	8.0.33
+-- Server version	8.0.32
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -23,15 +23,15 @@ DROP TABLE IF EXISTS `autor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `autor` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `apellidos` varchar(50) NOT NULL,
-  `authority` varchar(255) DEFAULT NULL,
-  `nombre` varchar(50) NOT NULL,
-  `passwd` varchar(64) NOT NULL,
-  `usuario` varchar(20) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `apellidos` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `usuario` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `passwd` varchar(64) COLLATE utf8mb4_general_ci NOT NULL,
+  `authority` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `UK_fffekjbsgmocf312iua33aj92` (`usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `usuario` (`usuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `autor` (
 
 LOCK TABLES `autor` WRITE;
 /*!40000 ALTER TABLE `autor` DISABLE KEYS */;
-INSERT INTO `autor` VALUES (1,'Lorenzo Martí','AUTOR','Izan','$2a$10$kYjNzXJ/xL1ue0fSF78LpOu86xK2SRZMAX5roiDWUlb4Chng/UTpi','izan_lorenzo');
+INSERT INTO `autor` VALUES (1,'Izan','Lorenzo Martí','izan_lorenzo','$2a$10$KfafPmJndc8xoLTanaWreOyr0IPRT4GYSMK9utzo8Y3gumVbyiCEy','AUTOR'),(2,'Rubén','Pérez Palao','ruben_perez','$2a$10$AKdgTZya.lTk/5Zk9Ir16eOYIcsIB1zG5kcBrGJBL0Qqta/Vnqh6y','AUTOR');
 /*!40000 ALTER TABLE `autor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -53,8 +53,9 @@ DROP TABLE IF EXISTS `imagen`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `imagen` (
   `id` bigint NOT NULL AUTO_INCREMENT,
+  `extension` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -63,7 +64,6 @@ CREATE TABLE `imagen` (
 
 LOCK TABLES `imagen` WRITE;
 /*!40000 ALTER TABLE `imagen` DISABLE KEYS */;
-INSERT INTO `imagen` VALUES (1),(2),(3),(4),(5),(6),(7),(8),(9),(10),(11),(12);
 /*!40000 ALTER TABLE `imagen` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -75,18 +75,18 @@ DROP TABLE IF EXISTS `noticia`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `noticia` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `cuerpo` varchar(255) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `fecha` date NOT NULL,
-  `titulo` varchar(50) NOT NULL,
-  `autor` bigint DEFAULT NULL,
+  `autor` int DEFAULT NULL,
+  `cuerpo` varchar(2048) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `imagen_id` bigint DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FKaj8oua7ocpvpv9v6lls9fq38m` (`autor`),
+  KEY `Autor` (`autor`),
   KEY `FKq4o50dd5xw0641hmqor0roqqu` (`imagen_id`),
-  CONSTRAINT `FKaj8oua7ocpvpv9v6lls9fq38m` FOREIGN KEY (`autor`) REFERENCES `autor` (`id`),
+  CONSTRAINT `Autor` FOREIGN KEY (`autor`) REFERENCES `autor` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `FKq4o50dd5xw0641hmqor0roqqu` FOREIGN KEY (`imagen_id`) REFERENCES `imagen` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,7 +95,6 @@ CREATE TABLE `noticia` (
 
 LOCK TABLES `noticia` WRITE;
 /*!40000 ALTER TABLE `noticia` DISABLE KEYS */;
-INSERT INTO `noticia` VALUES (1,'Este es un ejemplo de noticia, sólamente está aquí para testear que la API funciona correctamente. Por favor ignorad esta publicación.','2023-05-19','Ejemplo',1,9),(2,'Este es un ejemplo de noticia, sólamente está aquí para testear que la API funciona correctamente. Por favor ignorad esta publicación.','2023-05-19','Ejemplo',1,10),(3,'Este es un ejemplo de noticia, sólamente está aquí para testear que la API funciona correctamente. Por favor ignorad esta publicación.','2023-05-19','Ejemplo',1,12);
 /*!40000 ALTER TABLE `noticia` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -108,4 +107,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-19  9:57:36
+-- Dump completed on 2023-05-24 17:24:56
