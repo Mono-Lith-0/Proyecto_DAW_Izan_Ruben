@@ -55,7 +55,7 @@ CREATE TABLE `imagen` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `extension` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,6 +64,7 @@ CREATE TABLE `imagen` (
 
 LOCK TABLES `imagen` WRITE;
 /*!40000 ALTER TABLE `imagen` DISABLE KEYS */;
+INSERT INTO `imagen` VALUES (1,'.PNG'),(2,'.PNG'),(3,'.PNG'),(4,'.PNG'),(5,'.PNG');
 /*!40000 ALTER TABLE `imagen` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -86,7 +87,7 @@ CREATE TABLE `noticia` (
   KEY `FKq4o50dd5xw0641hmqor0roqqu` (`imagen_id`),
   CONSTRAINT `Autor` FOREIGN KEY (`autor`) REFERENCES `autor` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `FKq4o50dd5xw0641hmqor0roqqu` FOREIGN KEY (`imagen_id`) REFERENCES `imagen` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,6 +96,7 @@ CREATE TABLE `noticia` (
 
 LOCK TABLES `noticia` WRITE;
 /*!40000 ALTER TABLE `noticia` DISABLE KEYS */;
+INSERT INTO `noticia` VALUES (1,'Ejemplo de noticia','2023-05-26',1,'Este es un ejemplo de noticia, sólamente está aquí para testear que la API funciona correctamente. Por favor ignorad esta publicación.',NULL),(2,'Ejemplo de noticia','2023-05-26',1,'Este es un ejemplo de noticia, sólamente está aquí para testear que la API funciona correctamente. Por favor ignorad esta publicación.',3),(3,'Ejemplo de noticia','2023-05-26',1,'Este es un ejemplo de noticia, sólamente está aquí para testear que la API funciona correctamente. Por favor ignorad esta publicación.',4),(4,'Ejemplo de noticia','2023-05-26',1,'Este es un ejemplo de noticia, sólamente está aquí para testear que la API funciona correctamente. Por favor ignorad esta publicación.',5);
 /*!40000 ALTER TABLE `noticia` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -107,4 +109,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-24 17:24:56
+-- Dump completed on 2023-05-26 12:40:45

@@ -63,6 +63,8 @@ public class NoticiaController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (IOException e) {
             return new ResponseEntity<>(new IOException("Fallo del servidor inesperado").getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (NullPointerException e) {
+            imagen = null;
         }
         
         try {
@@ -72,7 +74,7 @@ public class NoticiaController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
-    
+
     @GetMapping
     public ResponseEntity getListNoticia() {
         

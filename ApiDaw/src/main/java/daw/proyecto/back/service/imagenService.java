@@ -43,6 +43,9 @@ public class imagenService {
                 Imagen saved = imagenRepository.save(imagen);
                 
                 File file = new File("imagenes/" + saved.getId() + extension);
+                if (!file.getParentFile().exists()) {
+                    file.getParentFile().mkdirs();
+                }
                 FileOutputStream writer = new FileOutputStream(file);
                 writer.write(sent.getBytes());
                 
