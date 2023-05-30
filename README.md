@@ -22,9 +22,9 @@ En cuanto a las nuevas páginas:
     > Se ha añadido la sección Editor y el desplegable de Editor.
   
   - Página Editores (a partir de la línea 165, paginaEditores.html ):
-    > Las noticias se encuentran dentro de un div con su 'value'
-    > Al seleccionar un div, se seleciona su 'value'
-    > Y al pulsar sobre el botón 'Eliminar noticia', se hace submit de ese valor
+    > Las noticias se encuentran dentro de un div con su 'value'.
+    > Al seleccionar un div, se seleciona su 'value'.
+    > Y al pulsar sobre el botón 'Eliminar noticia', se hace submit de ese valor.
   
   - Publicación Noticia
     > En cada campo, se introducen la información correspondientes.
