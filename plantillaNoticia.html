@@ -66,7 +66,7 @@
                     </li>
 
                     <!-- Página NOTICIAS -->
-                    <li class="nav-item">
+                    <li class="nav-item border-top">
                         <a class="nav-link px-4 py-3 fst-italic" href="./paginaNoticias.html"
                             onMouseOver="this.style.backgroundColor='lightgrey'"
                             onMouseOut="this.style.backgroundColor=''"
@@ -106,6 +106,55 @@
         <section class="mb-4">
             <div class="row">
                 <div class="col-md-8">
+
+                    <script>
+
+                        // Contenidos Noticia
+                        fetch("http://localhost:8080/api/noticia/id", {method: "get"})
+                        .then(lista => {
+                            let noticia = lista.body.entries();
+
+                            let tituloNoticia = document.body.querySelector("#tituloNoticia")
+                            let fechaPublicacion = document.body.querySelector("#fechaPublicacion")
+                            let nombreAutor = document.body.querySelector("#nombreAutor")
+                            let cuerpoNoticia = document.body.querySelector("#cuerpoNoticia")
+
+                            tituloNoticia.innerHTML = noticia.titulo
+                            fechaPublicacion.innerHTML = noticia.fecha
+                            nombreAutor.innerHTML = noticia.autor
+                            cuerpoNoticia.innerHTML = noticia.cuerpo 
+                        })
+
+
+                        // Lista Noticias (Barra Lateral)
+                        
+                        fetch("http://localhost:8080/api/noticia", {method: "get"})
+                        .then(lista => {
+                            
+                            var menu = document.getElementById("listaMes")
+                            var meses = lista.body.entries();
+
+                            meses.forEach(([mes, noticias]) => {
+
+                                var mesElement = document.createElement("li")
+                                var noticiaList = document.createElement("ol")
+                                mesElement.innerText = mes
+
+                                noticias.forEach(noticia => {
+                                    var noticiaElement = document.createElement("li")
+                                    noticiaElement.innerText = noticia.titulo
+                                    noticiaList.appendChild(noticiaElement)
+                                })
+
+                                mesElement.appendChild(noticiaList)
+                                menu.appendChild(mesElement)
+                            })
+
+                            let contenedorListaEnlaces = document.body.querySelector("#contenedorListaEnlaces")
+                            contenedorListaEnlaces.appendChild(menu)
+                        })
+
+                    </script>
 
                     <!-- Noticia / Artículo -->
                     <article class="blog-post">
@@ -281,23 +330,13 @@ Officiis Ad Provident Quaerat Nemo Repellat Assumenda.
                         </div>
 
                         <div class="p-4">
-                            <h4 class="fst-italic" id="nombreListaEnlaces1">Lorem Ipsum</h4>
-                            <ol class="list-unstyled mb-0" id="listaEnlaces1">
+                            <h4 class="fst-italic" id="contenedorListaEnlaces">Otras Noticias</h4>
+                            <ol class="list-unstyled mb-0" id="listaEnlaces">
                                 <li><a href="#">Ipsum Dor 1</a></li>
                                 <li><a href="#">Lorem Amet 2</a></li>
                                 <li><a href="#">Ipsum Dor 3</a></li>
                             </ol>
                         </div>
-
-                        <div class="p-4">
-                            <h4 class="fst-italic" id="nombreListaEnlaces2">Lorem Ipsum</h4>
-                            <ol class="list-unstyled" id="listaEnlaces2">
-                                <li><a href="#">Lorem Amet1</a></li>
-                                <li><a href="#">Ipsum Dor 2</a></li>
-                                <li><a href="#">Lorem Amet 3</a></li>
-                            </ol>
-                        </div>
-
                     </div>
                 </aside>
                 
@@ -319,7 +358,7 @@ Officiis Ad Provident Quaerat Nemo Repellat Assumenda.
                     CopyRight bandName © 2023 
                 </div>
 
-                <div class="col-md-6 col--6 mx-auto my-2">
+                <div class="col-md-6 col-lg-6 mx-auto my-2">
                     
                     <!-- FaceBook -->
                     <a class="btn btn-secondary rounded-circle text-white btn-floating m-1" href="#!" role="button">

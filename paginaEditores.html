@@ -132,7 +132,7 @@
                 <div class="p-0">
 
                     <!-- Contenedor Noticias -->
-                    <form class="container" style="margin-top: 4vh">
+                    <form action="http://localhost:8080/daw/api/noticia/id" method="delete" class="container" style="margin-top: 4vh">
                         
                         <h1 class="fst-italic fw-bold rounded pb-2">LISTA NOTICIAS <br> ⸻​​⸻​⸻</h1>
 
@@ -375,7 +375,7 @@
                 CopyRight bandName © 2023
                 </div>
 
-                <div class="col-md-6 col--6 mx-auto my-2">
+                <div class="col-md-6 col-lg-6 mx-auto my-2">
 
                 <!-- FaceBook -->
                 <a class="btn btn-secondary rounded-circle text-white btn-floating m-1" href="#!" role="button">
@@ -403,6 +403,49 @@
     </footer>
 
 </body>
+
+
+<script>
+    
+    // Noticias
+
+    fetch("http://localhost:8080/api/noticia", {method: "get"})
+    .then(lista => {
+
+        let listaNoticias = lista.body.entries();
+
+        let contenedorNoticias = document.body.querySelector("#contenedorNoticias")
+        contenedorNoticias.innerHTML = ""
+
+        for (let i = 0; i < listaNoticias.length; i++) {
+
+            let tituloNoticia = listaNoticias[listaNoticias.length - i].tituloNoticia;
+            let fecha = listaNoticias[listaNoticias.length - i].fecha;
+            let autor = listaNoticias[listaNoticias.length - i].autor;
+            let cuerpo = listaNoticias[listaNoticias.length - i].cuerpo;
+            let imagen_id = listaNoticias[listaNoticias.length - i].imagen_id;
+            
+            let divNoticia = `
+            <div class='d-flex flex-column bg-light col-xs-12 col-sm-6 col-md-4 rounded p-4 mb-4'>
+
+                <a class='link-dark link-underline-opacity-0 link-underline-opacity-100-hover' href='./plantillaNoticia.html' id='enlaceTituloNoticia'>
+                    <h2 class='blog-post-title' id='tituloNoticia'>${tituloNoticia}</h2>
+                </a>
+
+                <p class='blog-post-meta text-secondary mb-4'>
+                    <span id='fechaPublicacion'>${fecha}</span> por 
+                    <span class='fw-semibold' id='nombreAutor'><i>${autor}</i></span>
+                </p>
+
+                <a href='./plantillaNoticia.html' id='enlaceImagenNoticia'>
+                    <img class='img-thumbnail mt-auto rounded' src='${imagen_id}' id='imagenNoticia'/>
+                </a>
+            </div>`
+
+            contenedorNoticias.appendChild(divNoticia)
+        }
+    })
+</script>
 
 
 </html>
