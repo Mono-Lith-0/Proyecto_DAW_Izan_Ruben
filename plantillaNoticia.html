@@ -1,0 +1,342 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="Utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Estilo BootStrap 5.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" 
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" 
+    rel="stylesheet" crossorigin="anonymous">
+
+    <!-- Script BootStrap 5.3 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" 
+    crossorigin="anonymous"></script>
+
+    <!-- Iconos BootStrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+
+    <!-- FavIcon Página -->
+    <link rel="icon" type="image/x-icon" href="./imagenes/0_usoGeneral/favicon.ico">
+
+
+    <!-- Título Página -->
+    <title>bandName</title>
+</head>
+
+
+<body>
+
+    <!-- Cabecera / Barra Navegación -->
+    <header style="height: 8rem;">
+        <nav class="navbar navbar-expand-md bg-body-tertiary py-0 fixed-top shadow-sm">
+            <div class="container-fluid">
+        
+                <div></div>
+        
+                <!-- Logo Banda -->
+                <a class="position-absolute navbar-brand float-start" href="./index.html"><img src="./imagenes/0_usoGeneral/Logo Banda.png" style="position: fixed; top: 0.6rem; left: 1.6rem; height: 95px;"></a>
+        
+                <!-- Botón Desplegar -->
+                <button class="navbar-toggler my-2" type="button" data-bs-toggle="collapse" 
+                aria-controls="navbarsExample11"data-bs-target="#navbarsExample11" aria-expanded="false">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+        
+        
+                <div class="collapse navbar-collapse d-md-flex text-center" id="navbarsExample11">
+        
+                <div class="col-md-3 me-0"></div>
+        
+                <ul class="navbar-nav col-md-6 justify-content-md-center list-group">
+                    <li class="nav-item py-4"></li>
+        
+                    <!-- Página NOTICIAS -->
+                    <li class="nav-item">
+                        <a class="nav-link px-4 py-3 fst-italic" href="./index.html"
+                            onMouseOver="this.style.backgroundColor='lightgrey'"
+                            onMouseOut="this.style.backgroundColor=''"
+                            onClick="this.style.backgroundColor='silver'">
+                            NOTICIAS
+                        </a>
+                    </li>
+        
+                    <!-- Página BANDA -->
+                    <li class="nav-item border-top">
+                        <a class="nav-link px-4 py-3" href="./bandaMusica.html"
+                            onMouseOver="this.style.backgroundColor='lightgrey'"
+                            onMouseOut="this.style.backgroundColor=''"
+                            onClick="this.style.backgroundColor='silver';">
+                            BANDA
+                        </a>
+                    </li>
+        
+                    <li class="nav-item"></li>
+                </ul>
+        
+                <!-- Página INICIAR SESIÓN -->
+                <div class="d-md-flex col-md-3 justify-content-md-end">
+                    <a class="btn btn-secondary float-end my-2" href="./inicioSesion.html">
+                    <i class="bi bi-person-circle">&ensp;</i> INICIAR SESIÓN
+                    </a>
+                </div>
+        
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <!-- Cuerpo Página -->
+    <main class="container">
+        <section class="mb-4">
+            <div class="row">
+                <div class="col-md-8">
+
+                    <!-- Noticia / Artículo -->
+                    <article class="blog-post">
+                        
+                        <h2 class="blog-post-title mb-3" id="tituloNoticia">TÍTULO NOTICIA</h2>
+                        <p class="blog-post-meta">
+                            <span id="fechaPublicacion">1 de Enero, 2023</span> por 
+                            <span class="fw-semibold" id="nombreAutor"><i>Juan</i></span>
+                        </p>
+
+                        <div>
+                            <!-- ./imagenes/nombreImagen.jpg -->
+                            <img src="./imagenes/2_imaganesNoticias/Banda Musica.jpg" 
+                            class="img-fluid rounded mx-auto d-block" id="imagenNoticia">
+                        </div>
+                        
+                        <div class="mt-4" id="cuerpoNoticia">
+                            <p>
+                                Lorem Ipsum Dolor Sit Amet Consectetur, Adipisicing Elit. Ipsam Error 
+                                Molestias Temporibus, Aut Expedita Minus Laboriosam Tempore Neque Eum 
+                                Officiis Ad Provident Quaerat Nemo Repellat Assumenda. Quos Cupiditate 
+                                Unde Praesentium Tenetur Laboriosam Illo Eligendi Nam.
+                            </p>
+
+                            <hr>
+
+                            <p>
+                                Lorem Ipsum Dolor Sit Amet Consectetur, Adipisicing Elit. Ipsam Error 
+                                Molestias Temporibus, Aut Expedita Minus Laboriosam Tempore Neque Eum 
+                                Officiis Ad Provident Quaerat Nemo Repellat Assumenda. Quos Cupiditate 
+                                Unde Praesentium Tenetur Laboriosam Illo Eligendi Nam.
+                            </p>
+
+                            
+                            <h2>Lorem Ipsum</h2>
+                            <p>Lorem Ipsum Dolor Sit Amet Consectetur</p>
+                            
+                            <blockquote class="blockquote">
+                                <p>Lorem Ipsum Dolor Sit Amet Consectetur</p>
+                            </blockquote>
+
+                            <p>
+                                Lorem Ipsum Dolor Sit Amet Consectetur, Adipisicing Elit. Ipsam Error 
+                                Molestias Temporibus, Aut Expedita Minus Laboriosam Tempore Neque Eum 
+                                Officiis Ad Provident Quaerat Nemo Repellat Assumenda. Quos Cupiditate 
+                                Unde Praesentium Tenetur Laboriosam Illo Eligendi Nam.
+                            </p>
+
+                            <h3>Lorem Ipsum</h3>
+                            <p>
+                                Lorem Ipsum Dolor Sit Amet Consectetur, Adipisicing Elit. Ipsam Error 
+                                Molestias Temporibus, Aut Expedita Minus Laboriosam Tempore Neque Eum 
+                                Officiis Ad Provident Quaerat Nemo Repellat Assumenda.
+                            </p>
+
+                            <ul>
+                                <li>Lorem Ipsum</li>
+                                <li>Lorem Ipsum</li>
+                                <li>Lorem Ipsum</li>
+                            </ul>
+
+                            <p>Lorem Ipsum Dolor Sit Amet Consectetur</p>
+                            <ol>
+                                <li>Lorem Ipsum</li>
+                                <li>Lorem Ipsum</li>
+                                <li>Lorem Ipsum</li>
+                            </ol>
+
+                            <p>Lorem Ipsum Dolor Sit Amet Consectetur</p>
+                            <dl>
+                                <dt>Lorem Ipsum Dolor Sit Amet Consectetur</dt>
+                                <dd>
+                                    Lorem Ipsum Dolor Sit Amet Consectetur, Adipisicing Elit.
+                                    Ipsam Error Molestias Temporibus
+                                </dd>
+                                
+                                <dt>Lorem Ipsum Dolor Sit Amet Consectetur</dt>
+                                <dd>Lorem Ipsum Dolor Sit Amet Consectetur, Adipisicing Elit.</dd>
+                            </dl>
+
+                            <h2>Lorem Ipsum Sit Amet</h2>
+                            <p>
+                                Lorem Ipsum Dolor Sit Amet Consectetur, Adipisicing Elit. 
+                                Ipsam Error Molestias Temporibus, Aut Expedita Minus.
+                            <ul>
+                                <li>
+                                    <strong>Lorem Ipsum</strong>,
+                                    <code class="language-plaintext highlighter-rouge">&lt;strong&gt;</code>
+                                </li>
+                                
+                                <li>
+                                    <em>Lorem Ipsum</em>,
+                                    <code class="language-plaintext highlighter-rouge">&lt;em&gt;</code>
+                                </li>
+                        
+                                <li>
+                                    <abbr title="Lorem Ipsum Dolor Sit Amet Consectetur">Lorem Ipsum</abbr>, 
+                                    <code class="language-plaintext highlighter-rouge">&lt;abbr&gt;</code>
+                            
+                                <li>
+                                    <cite>— Lorem Ipsum</cite>,
+                                    <code class="language-plaintext highlighter-rouge">&lt;cite&gt;</code>
+                                </li>
+                            
+                                <li>
+                                    <del>Lorem Ipsum</del>,
+                                    <code class="language-plaintext highlighter-rouge">&lt;del&gt;</code> 
+                                </li>
+                            
+                                <li>
+                                    <ins>Lorem Ipsum</ins>,
+                                    <code class="language-plaintext highlighter-rouge">&lt;ins&gt;</code>
+                                </li>
+
+                                <li>
+                                    Lorem <sup>Ipsum</sup> Cons,
+                                    <code class="language-plaintext highlighter-rouge">&lt;sup&gt;</code>
+                                </li>
+
+                                <li>
+                                    Lorem <sub>Ipsum</sub> Cons,
+                                    <code class="language-plaintext highlighter-rouge">&lt;sub&gt;</code>.
+                                </li>
+                            </ul>
+
+                            <p>Lorem Ipsum Dolor Sit Amet Consectetur, Adipisicing Elit. Ipsam Error 
+                                Molestias Temporibus.</p>
+                            
+                            
+                            <h3>Lorem Ipsum</h3>
+                            <p>
+                                Lorem Ipsum Dolor Sit Amet Consectetur, Adipisicing Elit. Ipsam Error 
+                                Molestias Temporibus, Aut Expedita Minus Laboriosam Tempore Neque Eum 
+                                Officiis Ad Provident Quaerat Nemo Repellat Assumenda.
+                            </p>
+
+                            <pre><code>
+Lorem Ipsum Dolor Sit Amet Consectetur, Adipisicing Elit. Ipsam Error 
+Molestias Temporibus, Aut Expedita Minus Laboriosam Tempore Neque Eum 
+Officiis Ad Provident Quaerat Nemo Repellat Assumenda.
+                            </code></pre>
+
+                            <p>
+                                Lorem Ipsum Dolor Sit Amet Consectetur, Adipisicing Elit..
+                            </p>
+                        
+                            <p>
+                                Lorem Ipsum Dolor Sit Amet Consectetur, Adipisicing Elit. Ipsam Error 
+                                Molestias Temporibus, Aut Expedita Minus Laboriosam Tempore Neque Eum 
+                                Officiis Ad Provident Quaerat Nemo Repellat Assumenda.
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- Botón Arriba -->
+                    <nav class="blog-pagination float-end my-4" aria-label="Pagination">
+                        <a class="btn btn-outline-primary rounded-pill" href="#">
+                            <i class="bi bi-arrow-up-circle">&ensp;</i>Volver Arriba
+                        </a>
+                    </nav>
+                </div>
+
+                <!-- Barra Lateral -->
+                <aside class="col-md-4 rounded">
+                    <div class="position-sticky" style="top: 7rem;">
+
+                        <div class="p-4 mb-3 bg-body-tertiary rounded">
+                            <h4 class="fst-italic">Lorem Ipsum</h4>
+                            <p class="mb-0" id="informacionAdicional">
+                                Lorem Ipsum Dolor Sit Amet Consectetur, Adipisicing Elit. Ipsam Error 
+                                Molestias Temporibus, Aut Expedita Minus Laboriosam Tempore Neque
+                            </p>
+                        </div>
+
+                        <div class="p-4">
+                            <h4 class="fst-italic" id="nombreListaEnlaces1">Lorem Ipsum</h4>
+                            <ol class="list-unstyled mb-0" id="listaEnlaces1">
+                                <li><a href="#">Ipsum Dor 1</a></li>
+                                <li><a href="#">Lorem Amet 2</a></li>
+                                <li><a href="#">Ipsum Dor 3</a></li>
+                            </ol>
+                        </div>
+
+                        <div class="p-4">
+                            <h4 class="fst-italic" id="nombreListaEnlaces2">Lorem Ipsum</h4>
+                            <ol class="list-unstyled" id="listaEnlaces2">
+                                <li><a href="#">Lorem Amet1</a></li>
+                                <li><a href="#">Ipsum Dor 2</a></li>
+                                <li><a href="#">Lorem Amet 3</a></li>
+                            </ol>
+                        </div>
+
+                    </div>
+                </aside>
+                
+            </div>
+        </section>
+    </main>
+
+
+    <!-- Pie Página -->
+    <footer class="bg-secondary-subtle">
+        
+        <hr class="m-0">
+        
+        <div class="container-fluid py-4">
+            <div class="row m-0 text-center align-items-center">
+                
+                <!-- CopyRight -->
+                <div class="col-md-6 col-lg-6 mx-auto my-2">
+                    CopyRight bandName © 2023 
+                </div>
+
+                <div class="col-md-6 col--6 mx-auto my-2">
+                    
+                    <!-- FaceBook -->
+                    <a class="btn btn-secondary rounded-circle text-white btn-floating m-1" href="#!" role="button">
+                        <i class="bi bi-facebook"></i>
+                    </a>
+                
+                    <!-- Twitter -->
+                    <a class="btn btn-secondary rounded-circle text-white btn-floating m-1" href="#!" role="button">
+                        <i class="bi bi-twitter"></i>
+                    </a>
+                
+                    <!-- Instagram -->
+                    <a class="btn btn-secondary rounded-circle text-white btn-floating m-1" href="#!" role="button">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+
+                    <!-- YouTube -->
+                    <a class="btn btn-secondary rounded-circle text-white btn-floating m-1" href="#!" role="button">
+                        <i class="bi bi-youtube"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+
+</html>
